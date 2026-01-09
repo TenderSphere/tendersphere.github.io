@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TenderSphere – India’s Elite AI-Powered Procurement Intelligence</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div class="floating-actions">
+    <a href="Phone:+917838043102" class="action-btn btn-call" title="Call Us Now">
+        <i class="fas fa-phone"></i>
+    </a>
+    
+    <a href="https://wa.me/917838043102?text=Hello%20TenderSphere%20Team,%20I%20am%20interested%20in%20your%20procurement%20services.%20Please%20guide%20me." 
+       target="_blank" 
+       class="action-btn btn-whatsapp" 
+       title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
+<button id="chatbotTrigger" class="action-btn btn-chatbot"><i class="fas fa-robot"></i></button>
+
+<nav id="mainNav">
+  <div class="nav">
+    <a href="#" class="logo">
+      <div class="logo-icon">TS</div>
+      <div><span class="brand-tender">Tender</span><span class="brand-sphere">Sphere</span></div>
+    </a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Solutions</a></li>
+      <li><a href="#locations">Coverage</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <button class="btn-luxury" style="padding: 10px 22px; font-size: 0.85rem; border-radius: 10px;"><a href="login.html" style="color: #000; text-decoration: none;">CLIENT LOGIN</a></button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container animate__animated animate__fadeIn">
+    <span class="section-tag" style="background: rgba(0,242,255,0.1); padding: 6px 20px; border-radius: 50px; display: inline-block;">ISO 27001 SECURED <br>India's Premier AI Platform</span>
+    <h1>Bidding Intelligence <br><span class="gradient-text">Redefined for India</span></h1>
+    <p>Empowering businesses with real-time analytics and hyper-local data from all States & UTs. Win more with TenderSphere's predictive bidding engine.</p>
+    
+    <div class="search-container">
+        <input type="text" id="tenderSearch" class="search-input" placeholder="Search by Project, Department, or Location...">
+        <button id="searchBtn" class="btn-luxury" style="padding: 12px 40px; border-radius: 100px;" onclick="simulateSearch()">
+            <span id="btnText">Scan Engine</span>
+        </button>
+    </div>
+    
+    <a href="search.html" class="adv-search-link">Advanced Filters & Parameters <i class="fas fa-arrow-right" style="font-size: 12px; margin-left: 10px;"></i></a>
+
+    <div style="margin-top: 60px; display: flex; justify-content: center; gap: 80px; opacity: 0.4;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" height="40" alt="Gov" style="filter: grayscale(1) invert(1);">
+        <span style="font-weight: 800; font-size: 1.5rem; letter-spacing: 5px;">GeM</span>
+        <span style="font-weight: 800; font-size: 1.5rem; letter-spacing: 5px;">CPPP</span>
+    </div>
+    
+    <div class="stats-bar">
+        <div class="stat-item"><span class="stat-number">15,000+</span><span class="stat-label">Daily Updates</span></div>
+        <div class="stat-item"><span class="stat-number">5 Lacs+</span><span class="stat-label">Live Opportunities</span></div>
+        <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Verified Data</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="animate__animated animate__fadeInUp">
+  <div class="container about-grid">
+    <div class="about-text">
+        <span class="section-tag">Our Mission</span>
+        <h2 style="font-size: 2.8rem; margin-bottom: 25px;">Defining <span class="gradient-text">Procurement Excellence</span></h2>
+        <p>TenderSphere is the definitive procurement intelligence platform focused entirely on the Indian market. We consolidate notices from all Central Ministries, State Governments, PSUs, and Municipal bodies, ensuring you have a single window to every public bidding opportunity.</p>
+        <ul class="about-features">
+            <li>Real-time tender alerts from every State and Central portal.</li>
+            <li>Detailed documents and historical contract award data.</li>
+            <li>Competitive insights and pricing benchmarks for Indian tenders.</li>
+            <li>Seamless integration with eProcurement platforms.</li>
+        </ul>
+    </div>
+    <div class="about-image">
+        <div class="card-illustration">
+            <h3 style="color: var(--primary); margin-bottom: 20px; letter-spacing: 1px;">Unified Dashboard</h3>
+            <p style="font-size: 1rem; color: var(--muted);">Track bids across all 28 States and 8 Union Territories in one unified, high-speed interface.</p>
+            <div style="margin-top: 35px; font-weight: 800; font-size: 3.5rem; color: var(--primary); text-shadow: 0 0 20px rgba(0,242,255,0.3);">100%</div>
+            <p style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; margin-top: 10px;">Verified Data Source</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section id="why" style="background: rgba(255,255,255,0.01);">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 80px;">
+        <span class="section-tag">Value Proposition</span>
+        <h2 style="font-size: 3rem;">Why Leaders Choose <span class="gradient-text">TenderSphere?</span></h2>
+    </div>
+    <div class="services-grid">
+        <div class="service-card">
+            <span class="service-icon">📊</span>
+            <h3>Reliable & Verified</h3>
+            <p style="color: var(--muted);">Every notice is cross-referenced with official gazettes to ensure you never bid on outdated or incorrect data.</p>
+        </div>
+        <div class="service-card">
+            <span class="service-icon">⏱️</span>
+            <h3>Time-Saving Efficiency</h3>
+            <p style="color: var(--muted);">Stop wasting hours searching 100+ government portals. Get everything on one screen in seconds.</p>
+        </div>
+        <div class="service-card">
+            <span class="service-icon">🏆</span>
+            <h3>Competitive Edge</h3>
+            <p style="color: var(--muted);">Gain the upper hand with historical price trends and winner analysis to bid with precision.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 80px;">
+        <span class="section-tag">Platform Capability</span>
+        <h2 style="font-size: 3rem;">Built for <span class="gradient-text">Precision Bidding</span></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">📂</span>
+        <h3>Extensive Database</h3>
+        <p style="color: var(--muted);">Access an immense database of notices from Central/State gov, PSUs, and private sectors.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔔</span>
+        <h3>Customized Alerts</h3>
+        <p style="color: var(--muted);">Set up hyper-specific filters and get instant WhatsApp/Email notifications for your industry.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🖱️</span>
+        <h3>Modern Interface</h3>
+        <p style="color: var(--muted);">Clean, intuitive navigation designed to make complex data search feel effortless.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📞</span>
+        <h3>Expert Support</h3>
+        <p style="color: var(--muted);">Dedicated account managers to help you navigate tender eligibility and compliance.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🤖</span>
+        <h3>AI-Powered Filtering</h3>
+        <p style="color: var(--muted);">Our smart engine categorizes tenders by value, BOQ types, and EMD waivers with 99% accuracy.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🛡️</span>
+        <h3>Secure Archives</h3>
+        <p style="color: var(--muted);">Bank-grade encryption for all your downloaded NITs and historical bidding documents.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="locations">
+  <div class="container">
+    <div class="locations-container">
+        <div class="text-center">
+            <span class="section-tag">Geographical Reach</span>
+            <h2 style="font-size: 3rem;">Pan-India <span class="gradient-text">Coverage</span></h2>
+            <p style="color: var(--muted); margin-top: 15px; font-size: 1.1rem;">Live monitoring across 28 States and 8 Union Territories.</p>
+        </div>
+        
+        <h3 style="margin-top: 60px; color: var(--primary); font-size: 1.1rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; text-transform: uppercase; letter-spacing: 2px;">28 Indian States</h3>
+        <div class="locations-grid">
+            <div class="location-tag" onclick="portalRouter('Andhra Pradesh')">Andhra Pradesh</div>
+            <div class="location-tag" onclick="portalRouter('Arunachal Pradesh')">Arunachal Pradesh</div>
+            <div class="location-tag" onclick="portalRouter('Assam')">Assam</div>
+            <div class="location-tag" onclick="portalRouter('Bihar')">Bihar</div>
+            <div class="location-tag" onclick="portalRouter('Chhattisgarh')">Chhattisgarh</div>
+            <div class="location-tag" onclick="portalRouter('Goa')">Goa</div>
+            <div class="location-tag" onclick="portalRouter('Gujarat')">Gujarat</div>
+            <div class="location-tag" onclick="portalRouter('Haryana')">Haryana</div>
+            <div class="location-tag" onclick="portalRouter('Himachal Pradesh')">Himachal Pradesh</div>
+            <div class="location-tag" onclick="portalRouter('Jharkhand')">Jharkhand</div>
+            <div class="location-tag" onclick="portalRouter('Karnataka')">Karnataka</div>
+            <div class="location-tag" onclick="portalRouter('Kerala')">Kerala</div>
+            <div class="location-tag" onclick="portalRouter('Madhya Pradesh')">Madhya Pradesh</div>
+            <div class="location-tag" onclick="portalRouter('Maharashtra')">Maharashtra</div>
+            <div class="location-tag" onclick="portalRouter('Manipur')">Manipur</div>
+            <div class="location-tag" onclick="portalRouter('Meghalaya')">Meghalaya</div>
+            <div class="location-tag" onclick="portalRouter('Mizoram')">Mizoram</div>
+            <div class="location-tag" onclick="portalRouter('Nagaland')">Nagaland</div>
+            <div class="location-tag" onclick="portalRouter('Odisha')">Odisha</div>
+            <div class="location-tag" onclick="portalRouter('Punjab')">Punjab</div>
+            <div class="location-tag" onclick="portalRouter('Rajasthan')">Rajasthan</div>
+            <div class="location-tag" onclick="portalRouter('Sikkim')">Sikkim</div>
+            <div class="location-tag" onclick="portalRouter('Tamil Nadu')">Tamil Nadu</div>
+            <div class="location-tag" onclick="portalRouter('Telangana')">Telangana</div>
+            <div class="location-tag" onclick="portalRouter('Tripura')">Tripura</div>
+            <div class="location-tag" onclick="portalRouter('Uttar Pradesh')">Uttar Pradesh</div>
+            <div class="location-tag" onclick="portalRouter('Uttarakhand')">Uttarakhand</div>
+            <div class="location-tag" onclick="portalRouter('West Bengal')">West Bengal</div>
+        </div>
+
+        <h3 style="margin-top: 60px; color: var(--secondary); font-size: 1.1rem; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; text-transform: uppercase; letter-spacing: 2px;">8 Union Territories</h3>
+        <div class="locations-grid">
+            <div class="location-tag" onclick="portalRouter('Andaman & Nicobar')">Andaman & Nicobar</div>
+            <div class="location-tag" onclick="portalRouter('Chandigarh')">Chandigarh</div>
+            <div class="location-tag" onclick="portalRouter('D&N Haveli & Daman')">D&N Haveli & Daman</div>
+            <div class="location-tag" onclick="portalRouter('Delhi (NCT)')">Delhi (NCT)</div>
+            <div class="location-tag" onclick="portalRouter('Jammu & Kashmir')">Jammu & Kashmir</div>
+            <div class="location-tag" onclick="portalRouter('Ladakh')">Ladakh</div>
+            <div class="location-tag" onclick="portalRouter('Lakshadweep')">Lakshadweep</div>
+            <div class="location-tag" onclick="portalRouter('Puducherry')">Puducherry</div>
+        </div>
+            </div>
+          </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="text-center" style="margin-bottom: 70px;">
+        <span class="section-tag">Knowledge Base</span>
+        <h2 style="font-size: 3rem;">Common <span class="gradient-text">Inquiries</span></h2>
+    </div>
+    <div class="faq-container">
+      <details>
+        <summary>Which portals do you cover?</summary>
+        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">We provide 100% coverage of CPPP, GeM, Railways, Defence (MES), and all 37 individual State/UT e-procurement portals across India.</p>
+      </details>
+      <details>
+        <summary>How frequently is the database updated?</summary>
+        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">Our AI engines scan government portals 24/7. New notices appear on your feed within minutes of official publication.</p>
+      </details>
+      <details>
+        <summary>Can I set up WhatsApp alerts?</summary>
+        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">Yes. Our Premium plans offer real-time WhatsApp integration so you receive alerts on the go.</p>
+      </details>
+      <details>
+        <summary>Do you provide historical award data?</summary>
+        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">Absolutely. We track previous winners and L1 pricing to help you benchmark your bids against competitors.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-section">
+        <span class="section-tag text-center" style="display: block;">Request Private Demo</span>
+        <h2 class="text-center" style="font-size: 3rem; margin-bottom: 50px;">Scale Your <span class="gradient-text">Win Rate</span></h2>
+        <form id="demoForm">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <input type="text" class="form-input" placeholder="Your Name" required>
+                <input type="text" class="form-input" placeholder="Company Name" required>
+            </div>
+            <input type="email" class="form-input" placeholder="Corporate Email Address" required>
+            <textarea class="form-input" style="height: 160px;" placeholder="Industry Focus & Primary Regions (e.g. Roads in Maharashtra, IT in Karnataka)"></textarea>
+            <button type="submit" class="btn-luxury" style="width: 100%; font-size: 1.1rem; padding: 22px;">Initialize Demo Access</button>
+        </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="logo" style="margin-bottom: 3rem; justify-content: center;">
+        <div class="logo-icon">TS</div>
+        <span class="brand-tender" style="font-size: 2rem;">Tender</span><span class="brand-sphere" style="font-size: 2rem;">Sphere</span>
+    </div>
+    <p style="color: var(--muted); font-size: 1rem; letter-spacing: 1px;">© 2026 TenderSphere India Intelligence Pvt. Ltd. | 100% Verified Procurement Data.</p>
+    <div style="margin-top: 2.5rem; display: flex; justify-content: center; gap: 3rem;">
+        <a href="#" style="color: var(--muted); text-decoration: none; font-size: 0.9rem;">Privacy Policy</a>
+        <a href="#" style="color: var(--muted); text-decoration: none; font-size: 0.9rem;">Terms of Service</a>
+        <a href="#" style="color: var(--muted); text-decoration: none; font-size: 0.9rem;">Refund Policy</a>
+    </div>
+  </div>
+</footer>
+
+<div id="chatContainer" class="chat-window">
+    <div class="chat-header">
+        <div class="chat-status"></div>
+        <span>Sphere AI Assistant</span>
+        <button onclick="toggleChat()" style="background:none; border:none; color:white; cursor:pointer;"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="chatBody" class="chat-body">
+        <div class="bot-msg">Welcome to TenderSphere. I am your AI assistant. How can I help you win your next bid today?</div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="chatInput" placeholder="Ask about tenders, pricing, or coverage...">
+        <button onclick="handleChat()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

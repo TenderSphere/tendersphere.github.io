@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Intelligence Search | TenderSphere</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .adv-search-body { padding-top: 100px; }
+        
+        .adv-grid {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        /* Filter Sidebar Styling */
+        .filter-sidebar {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 35px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            backdrop-filter: blur(20px);
+        }
+
+        .filter-section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .filter-section:last-child { border-bottom: none; }
+
+        .label-title {
+            display: block;
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .adv-input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            padding: 14px;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .adv-input:focus {
+            border-color: var(--primary);
+            background: rgba(0, 242, 255, 0.05);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
+        }
+
+        /* Keyword Logic Radio Styles */
+        .logic-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 8px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        .logic-row:hover { background: rgba(255,255,255,0.03); }
+
+        .logic-row input[type="radio"] {
+            accent-color: var(--primary);
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+
+        .logic-row label {
+            font-size: 0.9rem;
+            color: var(--text);
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .avoid-words-label { color: #ff4b2b !important; }
+
+        /* Results Area */
+        .results-pane {
+            background: rgba(255,255,255,0.02);
+            border-radius: 32px;
+            padding: 40px;
+            min-height: 800px;
+        }
+
+        .tender-result-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 24px;
+            margin-bottom: 20px;
+            transition: 0.4s;
+        }
+
+        .tender-result-card:hover {
+            border-color: var(--primary);
+            transform: translateX(10px);
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* Dropdown Styling */
+        optgroup { background: #0a0a14; color: var(--primary); font-weight: 800; }
+        option { background: #03030b; color: #fff; padding: 10px; }
+    </style>
+</head>
+<body class="adv-search-body">
+
+<nav id="mainNav" class="scrolled">
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">TS</div>
+      <div><span class="brand-tender">Tender</span><span class="brand-sphere">Sphere</span></div>
+    </a>
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <a href="index.html" style="color: var(--muted); text-decoration: none; font-size: 0.9rem;">HOME</a>
+        <button class="btn-luxury" style="padding: 10px 20px; font-size: 0.8rem;" onclick="location.reload()">RESET ALL</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+    <div class="text-center" style="margin-bottom: 50px;">
+        <span class="section-tag" style="letter-spacing: 5px;">Bidding Intelligence</span>
+        <h1 style="font-size: 3.5rem;">Advanced <span class="gradient-text">Search Engine</span></h1>
+    </div>
+
+    <div class="adv-grid">
+        <aside class="filter-sidebar animate__animated animate__fadeInLeft">
+            
+            <div class="filter-section">
+                <span class="label-title">Notice Type</span>
+                <select class="adv-input" id="noticeType">
+                    <option value="all">All Notice Types</option>
+                    <option value="tender">Tenders (NIT)</option>
+                    <option value="project">Projects</option>
+                    <option value="prior">Prior Information Notice (PIN)</option>
+                    <option value="award">Contract Awards</option>
+                    <option value="auction">Auctions</option>
+                    <option value="corrigendum">Corrigendum / Addendum</option>
+                </select>
+            </div>
+
+            <div class="filter-section">
+                <span class="label-title">Keyword Logic</span>
+                
+                <div class="logic-row">
+                    <input type="radio" name="searchLogic" id="exact" checked>
+                    <label for="exact">Exact Search</label>
+                </div>
+                <div class="logic-row">
+                    <input type="radio" name="searchLogic" id="all">
+                    <label for="all">All These Words</label>
+                </div>
+                <div class="logic-row">
+                    <input type="radio" name="searchLogic" id="anyTwo">
+                    <label for="anyTwo">Any Two Words</label>
+                </div>
+                <div class="logic-row">
+                    <input type="radio" name="searchLogic" id="anyOne">
+                    <label for="anyOne">Any One Word</label>
+                </div>
+
+                <input type="text" class="adv-input" placeholder="Search keywords..." style="margin-top: 10px;">
+            </div>
+
+            <div class="filter-section">
+                <span class="label-title avoid-words-label">Avoid Words</span>
+                <input type="text" class="adv-input" placeholder="Exclude keywords (comma separated)">
+            </div>
+
+            <div class="filter-section">
+                <span class="label-title">Region / Location</span>
+                <select class="adv-input" id="locationSearch">
+                    <option value="pan-india">PAN INDIA (All States & UTs)</option>
+                    <optgroup label="States" id="stateGroup"></optgroup>
+                    <optgroup label="Union Territories" id="utGroup"></optgroup>
+                </select>
+            </div>
+
+            <div class="filter-section">
+                <span class="label-title">Tender Value Range</span>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <input type="number" class="adv-input" placeholder="Min (INR)">
+                    <span style="color: var(--muted);">to</span>
+                    <input type="number" class="adv-input" placeholder="Max (INR)">
+                </div>
+            </div>
+
+            <button class="btn-luxury" style="width: 100%; margin-top: 10px;" onclick="executeAdvSearch()">
+                <i class="fas fa-search" style="margin-right: 10px;"></i> INITIALIZE SCAN
+            </button>
+        </aside>
+
+        <main class="results-pane animate__animated animate__fadeIn">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 30px; align-items: center; border-bottom: 1px solid var(--glass-border); padding-bottom: 20px;">
+                <h3 id="resultStats" style="color: var(--muted); font-weight: 400;">Found <span style="color: var(--primary); font-weight: 800;">12,492</span> Active Opportunities</h3>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-luxury" style="padding: 8px 15px; font-size: 0.75rem; background: rgba(255,255,255,0.05); color: #fff;">Sort by Date</button>
+                    <button class="btn-luxury" style="padding: 8px 15px; font-size: 0.75rem; background: rgba(255,255,255,0.05); color: #fff;">Sort by Value</button>
+                </div>
+            </div>
+
+            <div id="resultsContent">
+                <div class="tender-result-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="color: var(--primary); font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;">Central Government</span>
+                        <span style="color: var(--muted); font-size: 0.8rem;"><i class="fas fa-history"></i> Posted 2 hours ago</span>
+                    </div>
+                    <h2 style="margin: 15px 0 10px; font-size: 1.4rem;">Design and Implementation of Unified Citizen Portal</h2>
+                    <p style="color: var(--muted); font-size: 0.95rem;">Ministry of Electronics and Information Technology (MeitY) | New Delhi</p>
+                    
+                    <div style="display: flex; gap: 40px; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+                        <div>
+                            <div style="font-size: 0.65rem; text-transform: uppercase; color: var(--muted); letter-spacing: 1px;">Estimated Cost</div>
+                            <div style="font-weight: 800; font-size: 1.1rem; color: #fff;">₹ 18,40,00,000</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.65rem; text-transform: uppercase; color: var(--muted); letter-spacing: 1px;">Deadline</div>
+                            <div style="font-weight: 800; font-size: 1.1rem; color: #fff;">28 Feb 2026</div>
+                        </div>
+                        <div style="margin-left: auto;">
+                            <button class="btn-luxury" style="padding: 12px 25px; font-size: 0.85rem;">PREVIEW DOCUMENTS</button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+        </main>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    // 1. Logic to populate State/UT dropdown from your modular portals.js
+    document.addEventListener('DOMContentLoaded', () => {
+        const stateGroup = document.getElementById('stateGroup');
+        const utGroup = document.getElementById('utGroup');
+
+        if (typeof PORTAL_LINKS !== 'undefined') {
+            // Sort and append States
+            Object.keys(PORTAL_LINKS.states).sort().forEach(state => {
+                const opt = document.createElement('option');
+                opt.value = state;
+                opt.innerText = state;
+                stateGroup.appendChild(opt);
+            });
+
+            // Sort and append UTs
+            Object.keys(PORTAL_LINKS.uts).sort().forEach(ut => {
+                const opt = document.createElement('option');
+                opt.value = ut;
+                opt.innerText = ut;
+                utGroup.appendChild(opt);
+            });
+        }
+    });
+
+    // 2. Search Execution Simulation
+    function executeAdvSearch() {
+        const results = document.getElementById('resultsContent');
+        const stats = document.getElementById('resultStats');
+        
+        // Show Loading State
+        results.style.opacity = '0.3';
+        stats.innerHTML = 'Scanning Pan-India Intelligence Databases...';
+
+        setTimeout(() => {
+            results.style.opacity = '1';
+            stats.innerHTML = 'Found <span style="color: var(--primary); font-weight: 800;">412</span> Filtered Opportunities';
+            alert("Sphere AI: Cross-referencing keywords, logic parameters, and notice types across 36 regional portals completed.");
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
