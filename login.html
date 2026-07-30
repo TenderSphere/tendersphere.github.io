@@ -201,7 +201,7 @@
         <form id="loginForm">
             <div class="input-group">
                 <i class="fas fa-envelope"></i>
-                <input type="email" class="form-input" placeholder="Corporate Email" required>
+                <input type="email" id="emailInput" class="form-input" placeholder="Corporate Email" required>
             </div>
 
             <div class="input-group">
@@ -227,7 +227,11 @@
 
             <button type="submit" class="btn-login" id="loginBtn">Authorize Access</button>
         </form>
-
+        <div id="userDetails" style="display:none; background: rgba(0,242,255,0.08); border: 1px solid var(--glass-border); padding: 20px; border-radius: 15px; margin-bottom: 20px;">
+          <h3 style="margin: 0 0 10px 0; color: var(--primary);">Welcome!</h3>
+          <p style="margin: 5px 0;">Username: <span id="showUsername"></span></p>
+          <p style="margin: 5px 0;">Email: <span id="showEmail"></span></p>
+        </div>
         <p class="back-link">Don't have an account? <a href="#">Contact Admin</a></p>
         <p class="back-link" style="margin-top: 15px;"><a href="index.html"><i class="fas fa-arrow-left"></i> Back to Homepage</a></p>
     </div>
@@ -256,27 +260,52 @@
     // Generate on load
     window.onload = generateCaptcha;
 
-    // 3. Login Logic
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const enteredCaptcha = document.getElementById('captchaInput').value;
-        const actualCaptcha = document.getElementById('captchaValue').innerText;
+    // 3. Login Logic (connected to Django backend)
+const API_URL = "http://127.0.0.1:8000/api"; // change this to your Render URL once deployed
 
-        if(enteredCaptcha.toUpperCase() !== actualCaptcha) {
-            alert("Security Verification Failed: Captcha does not match.");
-            generateCaptcha();
-            return;
-        }
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+e.preventDefault();
+const enteredCaptcha = document.getElementById('captchaInput').value;
+const actualCaptcha = document.getElementById('captchaValue').innerText;
 
-        const btn = document.getElementById('loginBtn');
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
-        btn.disabled = true;
+if(enteredCaptcha.toUpperCase() !== actualCaptcha) {
+alert("Security Verification Failed: Captcha does not match.");
+generateCaptcha();
+return;
+}
 
-        setTimeout(() => {
-            alert("Access Granted. Redirecting to your Dashboard...");
-            // window.location.href = 'dashboard.html'; 
-        }, 1500);
-    });
+const username = document.getElementById('emailInput').value;
+const password = document.getElementById('passwordInput').value;
+
+const btn = document.getElementById('loginBtn');
+btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+btn.disabled = true;
+
+try {
+const res = await fetch(`${API_URL}/login/`, {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ username, password }),
+});
+const data = await res.json();
+
+if (res.ok) {
+document.getElementById('showUsername').innerText = data.username;
+document.getElementById('showEmail').innerText = data.email;
+document.getElementById('userDetails').style.display = 'block';
+document.getElementById('loginForm').style.display = 'none';
+} else {
+alert(data.error || "Invalid credentials");
+btn.innerHTML = 'Authorize Access';
+btn.disabled = false;
+generateCaptcha();
+}
+} catch (err) {
+alert("Could not reach the server. Is Django running?");
+btn.innerHTML = 'Authorize Access';
+btn.disabled = false;
+}
+});
 
     // 4. Forgot Password logic
     function handleForgot() {
