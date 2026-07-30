@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account | TenderSphere Intelligence</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+:root {
+--primary: #00f2ff;
+--secondary: #7000ff;
+--bg: #03030b;
+--card-bg: rgba(255, 255, 255, 0.04);
+--glass-border: rgba(255, 255, 255, 0.1);
+--text: #f0f0f5;
+--muted: #a0a0b5;
+--grad: linear-gradient(135deg, #00f2ff 0%, #7000ff 100%);
+}
+body {
+margin: 0;
+background-color: var(--bg);
+color: var(--text);
+font-family: 'Plus Jakarta Sans', sans-serif;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow-x: hidden;
+padding: 40px 0;
+background-image: radial-gradient(circle at 0% 0%, rgba(112, 0, 255, 0.15) 0%, transparent 35%),
+radial-gradient(circle at 100% 100%, rgba(0, 242, 255, 0.15) 0%, transparent 35%);
+}
+.login-container {
+width: 100%;
+max-width: 1100px;
+min-height: 650px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+background: var(--card-bg);
+backdrop-filter: blur(20px);
+border: 1px solid var(--glass-border);
+border-radius: 40px;
+overflow: hidden;
+box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+}
+.login-info {
+background: linear-gradient(rgba(3, 3, 11, 0.8), rgba(3, 3, 11, 0.8)),
+url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80');
+background-size: cover;
+padding: 60px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+border-right: 1px solid var(--glass-border);
+}
+.logo-box { display: flex; align-items: center; gap: 15px; margin-bottom: 40px; }
+.logo-icon {
+background: var(--grad);
+width: 45px; height: 45px; border-radius: 12px;
+display: flex; align-items: center; justify-content: center;
+font-weight: 800; color: #000;
+}
+.login-form-area {
+padding: 60px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+.input-group { position: relative; margin-bottom: 18px; }
+.input-group i {
+position: absolute; left: 20px; top: 26px;
+transform: translateY(-50%); color: var(--muted);
+}
+.form-input, .form-select {
+width: 100%;
+background: rgba(255,255,255,0.05);
+border: 1px solid var(--glass-border);
+padding: 18px 20px 18px 55px;
+border-radius: 15px;
+color: #fff;
+font-size: 1rem;
+transition: 0.3s;
+box-sizing: border-box;
+font-family: inherit;
+appearance: none;
+}
+.form-select option { background: #0a0a15; color: #fff; }
+.form-input:focus, .form-select:focus {
+outline: none;
+border-color: var(--primary);
+background: rgba(0, 242, 255, 0.05);
+box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+}
+.field-label {
+font-size: 0.8rem;
+color: var(--muted);
+margin-bottom: 8px;
+display: block;
+font-weight: 600;
+letter-spacing: 0.5px;
+text-transform: uppercase;
+}
+.interests-box {
+background: rgba(255,255,255,0.03);
+border: 1px solid var(--glass-border);
+border-radius: 15px;
+padding: 16px 18px;
+margin-bottom: 20px;
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 10px;
+}
+.interest-chip {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 0.85rem;
+color: var(--muted);
+cursor: pointer;
+}
+.interest-chip input { accent-color: var(--primary); cursor: pointer; }
+.interest-chip:has(input:checked) { color: var(--primary); }
+.btn-login {
+background: var(--grad);
+width: 100%;
+padding: 18px;
+border-radius: 15px;
+border: none;
+color: #000;
+font-weight: 800;
+font-size: 1rem;
+cursor: pointer;
+transition: 0.4s;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+.btn-login:hover {
+transform: translateY(-3px);
+box-shadow: 0 15px 30px rgba(0, 242, 255, 0.3);
+filter: brightness(1.1);
+}
+.btn-login:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+.back-link {
+text-align: center;
+margin-top: 25px;
+font-size: 0.9rem;
+color: var(--muted);
+}
+.back-link a { color: #fff; text-decoration: none; font-weight: 600; }
+.msg-box {
+padding: 14px 18px;
+border-radius: 12px;
+margin-bottom: 20px;
+font-size: 0.9rem;
+display: none;
+}
+.msg-success { background: rgba(0, 242, 255, 0.1); border: 1px solid var(--primary); color: var(--primary); }
+.msg-error { background: rgba(255, 60, 60, 0.1); border: 1px solid #ff5050; color: #ff8080; }
+@media (max-width: 900px) {
+.login-container { grid-template-columns: 1fr; height: auto; max-width: 500px; margin: 20px; }
+.login-info { display: none; }
+.interests-box { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="login-container animate__animated animate__zoomIn">
+    <div class="login-info">
+        <div class="logo-box">
+            <div class="logo-icon">TS</div>
+            <h2 style="letter-spacing: 2px;">TENDER<span style="color:var(--primary); font-weight: 300;">SPHERE</span></h2>
+        </div>
+        <h1 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: 20px;">Join the <br><span style="color: var(--primary);">Intelligence Hub.</span></h1>
+        <p style="color: var(--muted);">Create your partner account to access real-time bidding analytics, historical data, and premium government notices.</p>
+        <div style="margin-top: 40px;">
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                <i class="fas fa-shield-check" style="color: var(--primary);"></i>
+                <span>256-bit AES Encryption</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <i class="fas fa-bolt" style="color: var(--primary);"></i>
+                <span>Instant Account Activation</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-form-area">
+        <h2 style="margin-bottom: 10px;">Create Account</h2>
+        <p style="color: var(--muted); margin-bottom: 25px; font-size: 0.9rem;">Register to access the platform.</p>
+
+        <div id="successMsg" class="msg-box msg-success"></div>
+        <div id="errorMsg" class="msg-box msg-error"></div>
+
+        <form id="registerForm">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="usernameInput" class="form-input" placeholder="Choose a Username" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="emailInput" class="form-input" placeholder="Corporate Email" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" id="phoneInput" class="form-input" placeholder="Phone Number" pattern="[0-9]{10}" maxlength="10" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-location-dot"></i>
+                <select id="stateInput" class="form-select" required>
+                    <option value="" disabled selected>Select Your State</option>
+                    <option value="AP">Andhra Pradesh</option>
+                    <option value="AR">Arunachal Pradesh</option>
+                    <option value="AS">Assam</option>
+                    <option value="BR">Bihar</option>
+                    <option value="CG">Chhattisgarh</option>
+                    <option value="GA">Goa</option>
+                    <option value="GJ">Gujarat</option>
+                    <option value="HR">Haryana</option>
+                    <option value="HP">Himachal Pradesh</option>
+                    <option value="JH">Jharkhand</option>
+                    <option value="KA">Karnataka</option>
+                    <option value="KL">Kerala</option>
+                    <option value="MP">Madhya Pradesh</option>
+                    <option value="MH">Maharashtra</option>
+                    <option value="MN">Manipur</option>
+                    <option value="ML">Meghalaya</option>
+                    <option value="MZ">Mizoram</option>
+                    <option value="NL">Nagaland</option>
+                    <option value="OD">Odisha</option>
+                    <option value="PB">Punjab</option>
+                    <option value="RJ">Rajasthan</option>
+                    <option value="SK">Sikkim</option>
+                    <option value="TN">Tamil Nadu</option>
+                    <option value="TS">Telangana</option>
+                    <option value="TR">Tripura</option>
+                    <option value="UP">Uttar Pradesh</option>
+                    <option value="UK">Uttarakhand</option>
+                    <option value="WB">West Bengal</option>
+                    <option value="DL">Delhi</option>
+                </select>
+            </div>
+
+            <label class="field-label">Tender Interests</label>
+            <div class="interests-box">
+                <label class="interest-chip"><input type="checkbox" value="Construction"> Construction</label>
+                <label class="interest-chip"><input type="checkbox" value="IT & Software"> IT & Software</label>
+                <label class="interest-chip"><input type="checkbox" value="Healthcare"> Healthcare</label>
+                <label class="interest-chip"><input type="checkbox" value="Defence"> Defence</label>
+                <label class="interest-chip"><input type="checkbox" value="Education"> Education</label>
+                <label class="interest-chip"><input type="checkbox" value="Transport"> Transport</label>
+                <label class="interest-chip"><input type="checkbox" value="Energy"> Energy</label>
+                <label class="interest-chip"><input type="checkbox" value="Agriculture"> Agriculture</label>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="passwordInput" class="form-input" placeholder="Password" required>
+                <i class="fas fa-eye" id="togglePass1" style="left: auto; right: 20px; cursor: pointer;"></i>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="confirmPasswordInput" class="form-input" placeholder="Confirm Password" required>
+                <i class="fas fa-eye" id="togglePass2" style="left: auto; right: 20px; cursor: pointer;"></i>
+            </div>
+
+            <button type="submit" class="btn-login" id="registerBtn">Create Account</button>
+        </form>
+
+        <p class="back-link">Already have an account? <a href="login.html">Sign In</a></p>
+        <p class="back-link" style="margin-top: 10px;"><a href="index.html"><i class="fas fa-arrow-left"></i> Back to Homepage</a></p>
+    </div>
+</div>
+
+<script>
+function setupToggle(iconId, inputId) {
+    const icon = document.getElementById(iconId);
+    const input = document.getElementById(inputId);
+    icon.addEventListener('click', () => {
+        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+        input.setAttribute('type', type);
+        icon.classList.toggle('fa-eye-slash');
+    });
+}
+setupToggle('togglePass1', 'passwordInput');
+setupToggle('togglePass2', 'confirmPasswordInput');
+
+const API_URL = "http://127.0.0.1:8000/api"; // change this to your Render URL once deployed
+
+const successMsg = document.getElementById('successMsg');
+const errorMsg = document.getElementById('errorMsg');
+
+function showSuccess(text) {
+    successMsg.innerText = text;
+    successMsg.style.display = 'block';
+    errorMsg.style.display = 'none';
+}
+function showError(text) {
+    errorMsg.innerText = text;
+    errorMsg.style.display = 'block';
+    successMsg.style.display = 'none';
+}
+
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById('usernameInput').value.trim();
+    const email = document.getElementById('emailInput').value.trim();
+    const phone = document.getElementById('phoneInput').value.trim();
+    const state = document.getElementById('stateInput').value;
+    const password = document.getElementById('passwordInput').value;
+    const confirmPassword = document.getElementById('confirmPasswordInput').value;
+
+    const checkedInterests = Array.from(document.querySelectorAll('.interest-chip input:checked')).map(cb => cb.value);
+    const tender_interests = checkedInterests.join(', ');
+
+    if (password !== confirmPassword) {
+        showError("Passwords do not match.");
+        return;
+    }
+    if (password.length < 6) {
+        showError("Password should be at least 6 characters.");
+        return;
+    }
+    if (!state) {
+        showError("Please select your state.");
+        return;
+    }
+    if (checkedInterests.length === 0) {
+        showError("Please select at least one tender interest.");
+        return;
+    }
+
+    const btn = document.getElementById('registerBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+    btn.disabled = true;
+
+    try {
+        const res = await fetch(`${API_URL}/register/`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email, password, phone, state, tender_interests }),
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+            showSuccess("Account created successfully! Redirecting to login...");
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1800);
+        } else {
+            const firstError = Object.values(data)[0];
+            const message = Array.isArray(firstError) ? firstError[0] : (data.error || "Registration failed.");
+            showError(message);
+            btn.innerHTML = 'Create Account';
+            btn.disabled = false;
+        }
+    } catch (err) {
+        showError("Could not reach the server. Is Django running?");
+        btn.innerHTML = 'Create Account';
+        btn.disabled = false;
+    }
+});
+</script>
+</body>
+</html>
