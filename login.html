@@ -290,10 +290,8 @@ body: JSON.stringify({ username, password }),
 const data = await res.json();
 
 if (res.ok) {
-document.getElementById('showUsername').innerText = data.username;
-document.getElementById('showEmail').innerText = data.email;
-document.getElementById('userDetails').style.display = 'block';
-document.getElementById('loginForm').style.display = 'none';
+localStorage.setItem('access_token', data.access);
+window.location.href = "dashboard.html";
 } else {
 alert(data.error || "Invalid credentials");
 btn.innerHTML = 'Authorize Access';
