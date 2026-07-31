@@ -19,7 +19,6 @@
             --muted: #a0a0b5;
             --grad: linear-gradient(135deg, #00f2ff 0%, #7000ff 100%);
         }
-
         body {
             margin: 0;
             background-color: var(--bg);
@@ -33,7 +32,6 @@
             background-image: radial-gradient(circle at 0% 0%, rgba(112, 0, 255, 0.15) 0%, transparent 35%),
                               radial-gradient(circle at 100% 100%, rgba(0, 242, 255, 0.15) 0%, transparent 35%);
         }
-
         .login-container {
             width: 100%;
             max-width: 1100px;
@@ -47,10 +45,8 @@
             overflow: hidden;
             box-shadow: 0 50px 100px rgba(0,0,0,0.5);
         }
-
-        /* Left Side: Branding/Visual */
         .login-info {
-            background: linear-gradient(rgba(3, 3, 11, 0.8), rgba(3, 3, 11, 0.8)), 
+            background: linear-gradient(rgba(3, 3, 11, 0.8), rgba(3, 3, 11, 0.8)),
                         url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80');
             background-size: cover;
             padding: 60px;
@@ -59,7 +55,6 @@
             justify-content: center;
             border-right: 1px solid var(--glass-border);
         }
-
         .logo-box { display: flex; align-items: center; gap: 15px; margin-bottom: 40px; }
         .logo-icon {
             background: var(--grad);
@@ -67,21 +62,17 @@
             display: flex; align-items: center; justify-content: center;
             font-weight: 800; color: #000;
         }
-
-        /* Right Side: Form */
         .login-form-area {
             padding: 60px;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-
         .input-group { position: relative; margin-bottom: 20px; }
         .input-group i {
             position: absolute; left: 20px; top: 50%;
             transform: translateY(-50%); color: var(--muted);
         }
-
         .form-input {
             width: 100%;
             background: rgba(255,255,255,0.05);
@@ -92,14 +83,12 @@
             font-size: 1rem;
             transition: 0.3s;
         }
-
         .form-input:focus {
             outline: none;
             border-color: var(--primary);
             background: rgba(0, 242, 255, 0.05);
             box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
         }
-
         .options-row {
             display: flex;
             justify-content: space-between;
@@ -107,11 +96,8 @@
             margin-bottom: 25px;
             font-size: 0.85rem;
         }
-
         .remember-me { display: flex; align-items: center; gap: 8px; color: var(--muted); cursor: pointer; }
         .forgot-pass { color: var(--primary); text-decoration: none; font-weight: 600; }
-
-        /* Captcha Box */
         .captcha-container {
             background: rgba(255,255,255,0.03);
             border: 1px solid var(--glass-border);
@@ -122,7 +108,6 @@
             align-items: center;
             justify-content: space-between;
         }
-
         #captchaValue {
             font-family: 'Courier New', monospace;
             font-weight: 800;
@@ -134,7 +119,6 @@
             user-select: none;
             text-decoration: line-through;
         }
-
         .btn-login {
             background: var(--grad);
             width: 100%;
@@ -149,22 +133,19 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
         .btn-login:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 30px rgba(0, 242, 255, 0.3);
             filter: brightness(1.1);
         }
-
+        .btn-login:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
         .back-link {
             text-align: center;
             margin-top: 30px;
             font-size: 0.9rem;
             color: var(--muted);
         }
-
         .back-link a { color: #fff; text-decoration: none; font-weight: 600; }
-
         @media (max-width: 900px) {
             .login-container { grid-template-columns: 1fr; height: auto; max-width: 500px; margin: 20px; }
             .login-info { display: none; }
@@ -181,7 +162,7 @@
         </div>
         <h1 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: 20px;">Welcome to the <br><span style="color: var(--primary);">Intelligence Hub.</span></h1>
         <p style="color: var(--muted);">Access real-time bidding analytics, historical data, and premium government notices in one secure environment.</p>
-        
+
         <div style="margin-top: 40px;">
             <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
                 <i class="fas fa-shield-check" style="color: var(--primary);"></i>
@@ -227,28 +208,21 @@
 
             <button type="submit" class="btn-login" id="loginBtn">Authorize Access</button>
         </form>
-        <div id="userDetails" style="display:none; background: rgba(0,242,255,0.08); border: 1px solid var(--glass-border); padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-          <h3 style="margin: 0 0 10px 0; color: var(--primary);">Welcome!</h3>
-          <p style="margin: 5px 0;">Username: <span id="showUsername"></span></p>
-          <p style="margin: 5px 0;">Email: <span id="showEmail"></span></p>
-        </div>
-        <p class="back-link">Don't have an account? <a href="Register.html">Register Now</a></p>
+        <p class="back-link">Don't have an account? <a href="register.html">Register Now</a></p>
         <p class="back-link" style="margin-top: 15px;"><a href="index.html"><i class="fas fa-arrow-left"></i> Back to Homepage</a></p>
     </div>
 </div>
 
 <script>
-    // 1. Password Visibility Toggle
     const togglePass = document.querySelector('#togglePass');
-    const password = document.querySelector('#passwordInput');
+    const passwordToggleInput = document.querySelector('#passwordInput');
 
     togglePass.addEventListener('click', () => {
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
+        const type = passwordToggleInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordToggleInput.setAttribute('type', type);
         togglePass.classList.toggle('fa-eye-slash');
     });
 
-    // 2. Dynamic CAPTCHA Generation
     function generateCaptcha() {
         const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         let result = '';
@@ -257,54 +231,51 @@
         }
         document.getElementById('captchaValue').innerText = result;
     }
-    // Generate on load
     window.onload = generateCaptcha;
 
-    // 3. Login Logic (connected to Django backend)
-const API_URL = "https://tendersphere-backend.onrender.com/api"; // change this to your Render URL once deployed
+    const API_URL = "https://tendersphere-backend.onrender.com/api";
 
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-e.preventDefault();
-const enteredCaptcha = document.getElementById('captchaInput').value;
-const actualCaptcha = document.getElementById('captchaValue').innerText;
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const enteredCaptcha = document.getElementById('captchaInput').value;
+        const actualCaptcha = document.getElementById('captchaValue').innerText;
 
-if(enteredCaptcha.toUpperCase() !== actualCaptcha) {
-alert("Security Verification Failed: Captcha does not match.");
-generateCaptcha();
-return;
-}
+        if (enteredCaptcha.toUpperCase() !== actualCaptcha) {
+            alert("Security Verification Failed: Captcha does not match.");
+            generateCaptcha();
+            return;
+        }
 
-const username = document.getElementById('emailInput').value;
-const password = document.getElementById('passwordInput').value;
+        const username = document.getElementById('emailInput').value;
+        const password = document.getElementById('passwordInput').value;
 
-const btn = document.getElementById('loginBtn');
-btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
-btn.disabled = true;
+        const btn = document.getElementById('loginBtn');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+        btn.disabled = true;
 
-try {
-const res = await fetch(`${API_URL}/login/`, {
-method: "POST",
-headers: { "Content-Type": "application/json" },
-body: JSON.stringify({ username, password }),
-});
-const data = await res.json();
+        try {
+            const res = await fetch(`${API_URL}/login/`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password }),
+            });
+            const data = await res.json();
 
-if (res.ok) {
-localStorage.setItem('access_token', data.access);
-window.location.href = "dashboard.html";
-} else {
-alert(data.error || "Invalid credentials");
-btn.innerHTML = 'Authorize Access';
-btn.disabled = false;
-generateCaptcha();
-}
-} catch (err) {
-alert("Could not reach the server. Is Django running?");
-btn.innerHTML = 'Authorize Access';
-btn.disabled = false;
-}
-});
-
+            if (res.ok) {
+                localStorage.setItem('access_token', data.access);
+                window.location.href = "dashboard.html";
+            } else {
+                alert(data.error || "Invalid credentials");
+                btn.innerHTML = 'Authorize Access';
+                btn.disabled = false;
+                generateCaptcha();
+            }
+        } catch (err) {
+            alert("Could not reach the server. Please try again.");
+            btn.innerHTML = 'Authorize Access';
+            btn.disabled = false;
+        }
+    });
 </script>
 
 </body>
