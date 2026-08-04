@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browse Tenders | TenderSphere</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+:root {
+--primary: #00f2ff;
+--secondary: #7000ff;
+--bg: #03030b;
+--card-bg: rgba(255, 255, 255, 0.04);
+--glass-border: rgba(255, 255, 255, 0.1);
+--text: #f0f0f5;
+--muted: #a0a0b5;
+--grad: linear-gradient(135deg, #00f2ff 0%, #7000ff 100%);
+}
+body {
+margin: 0;
+background-color: var(--bg);
+color: var(--text);
+font-family: 'Plus Jakarta Sans', sans-serif;
+min-height: 100vh;
+padding: 20px;
+box-sizing: border-box;
+background-image: radial-gradient(circle at 0% 0%, rgba(112, 0, 255, 0.15) 0%, transparent 35%),
+radial-gradient(circle at 100% 100%, rgba(0, 242, 255, 0.15) 0%, transparent 35%);
+}
+.top-bar {
+max-width: 1000px;
+margin: 0 auto 30px auto;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 15px;
+}
+.logo-box { display: flex; align-items: center; gap: 12px; }
+.logo-icon {
+background: var(--grad);
+width: 40px; height: 40px; border-radius: 10px;
+display: flex; align-items: center; justify-content: center;
+font-weight: 800; color: #000; font-size: 0.9rem;
+}
+.nav-link {
+color: var(--muted);
+text-decoration: none;
+font-size: 0.9rem;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.btn-login-nav {
+background: var(--grad);
+color: #000;
+padding: 10px 20px;
+border-radius: 10px;
+text-decoration: none;
+font-weight: 700;
+font-size: 0.85rem;
+}
+.container { max-width: 1000px; margin: 0 auto; }
+.page-header { margin-bottom: 25px; }
+.page-header h1 { margin: 0 0 8px 0; font-size: 1.8rem; }
+.page-header p { color: var(--muted); margin: 0; }
+.banner {
+background: rgba(0, 242, 255, 0.06);
+border: 1px solid var(--primary);
+border-radius: 15px;
+padding: 16px 20px;
+margin-bottom: 25px;
+font-size: 0.9rem;
+color: var(--primary);
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 10px;
+}
+.banner a { color: #000; background: var(--grad); padding: 8px 16px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 0.8rem; }
+.tender-grid { display: flex; flex-direction: column; gap: 16px; }
+.tender-card {
+background: var(--card-bg);
+backdrop-filter: blur(20px);
+border: 1px solid var(--glass-border);
+border-radius: 20px;
+padding: 25px;
+transition: 0.3s;
+}
+.tender-card:hover { border-color: var(--primary); }
+.tender-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; flex-wrap: wrap; margin-bottom: 12px; }
+.tender-title { font-size: 1.15rem; font-weight: 700; margin: 0 0 6px 0; }
+.tender-dept { color: var(--muted); font-size: 0.85rem; }
+.tag-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag {
+background: rgba(0, 242, 255, 0.1);
+border: 1px solid var(--primary);
+color: var(--primary);
+padding: 4px 12px;
+border-radius: 20px;
+font-size: 0.75rem;
+white-space: nowrap;
+}
+.tag.state-tag { background: rgba(112, 0, 255, 0.1); border-color: var(--secondary); color: #b794ff; }
+.tender-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.5; margin: 12px 0; }
+.tender-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; flex-wrap: wrap; gap: 10px; }
+.deadline-badge { font-size: 0.8rem; color: var(--primary); font-weight: 600; }
+.detail-row { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 10px; font-size: 0.85rem; color: var(--muted); }
+.detail-row span b { color: var(--text); }
+.doc-link { color: var(--primary); text-decoration: none; font-size: 0.85rem; font-weight: 600; }
+.locked-note { color: var(--muted); font-size: 0.8rem; font-style: italic; margin-top: 8px; }
+.loading, .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+@media (max-width: 700px) {
+.tender-card { padding: 18px; }
+}
+</style>
+</head>
+<body>
+<div class="top-bar">
+    <div class="logo-box">
+        <div class="logo-icon">TS</div>
+        <h2 style="letter-spacing: 2px; font-size: 1.1rem; margin: 0;">TENDER<span style="color:var(--primary); font-weight: 300;">SPHERE</span></h2>
+    </div>
+    <div id="navArea"></div>
+</div>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Browse Tenders</h1>
+        <p>Live government tender listings across categories and states.</p>
+    </div>
+
+    <div id="loginBanner" class="banner" style="display:none;">
+        <span><i class="fas fa-lock"></i> Login to see full descriptions, values, and direct document links.</span>
+        <a href="login.html">Login</a>
+    </div>
+
+    <div id="tenderGrid" class="tender-grid">
+        <div class="loading"><i class="fas fa-spinner fa-spin" style="font-size: 1.5rem;"></i><p>Loading tenders...</p></div>
+    </div>
+</div>
+
+<script>
+const API_URL = "https://tendersphere-backend.onrender.com/api";
+const token = localStorage.getItem('access_token');
+
+const navArea = document.getElementById('navArea');
+if (token) {
+    navArea.innerHTML = `<a href="dashboard.html" class="nav-link"><i class="fas fa-user"></i> Dashboard</a>`;
+} else {
+    navArea.innerHTML = `<a href="login.html" class="btn-login-nav">Login</a>`;
+}
+
+async function loadTenders() {
+    const grid = document.getElementById('tenderGrid');
+    const banner = document.getElementById('loginBanner');
+
+    try {
+        const headers = {};
+        if (token) headers["Authorization"] = `Bearer ${token}`;
+
+        const res = await fetch(`${API_URL}/tenders/`, { headers });
+        const data = await res.json();
+
+        if (!data.is_logged_in) {
+            banner.style.display = 'flex';
+        }
+
+        if (!data.tenders || data.tenders.length === 0) {
+            grid.innerHTML = `<div class="empty-state"><i class="fas fa-inbox" style="font-size: 2rem; margin-bottom: 10px;"></i><p>No tenders posted yet. Check back soon.</p></div>`;
+            return;
+        }
+
+        grid.innerHTML = data.tenders.map(t => `
+            <div class="tender-card animate__animated animate__fadeIn">
+                <div class="tender-top">
+                    <div>
+                        <div class="tender-title">${t.title}</div>
+                        <div class="tender-dept"><i class="fas fa-building"></i> ${t.department}</div>
+                    </div>
+                    <div class="tag-row">
+                        <span class="tag">${t.category}</span>
+                        <span class="tag state-tag">${t.state}</span>
+                    </div>
+                </div>
+                <div class="tender-desc">${t.description}</div>
+                ${data.is_logged_in ? `
+                    <div class="detail-row">
+                        ${t.tender_value ? `<span>Value: <b>${t.tender_value}</b></span>` : ''}
+                        <span>Ref: <b>${t.reference_number}</b></span>
+                    </div>
+                ` : `<div class="locked-note"><i class="fas fa-lock"></i> Login to see value, reference number, and document link</div>`}
+                <div class="tender-footer">
+                    <span class="deadline-badge"><i class="fas fa-clock"></i> Closes: ${t.deadline}</span>
+                    ${data.is_logged_in && t.document_link ? `<a href="${t.document_link}" target="_blank" class="doc-link">View Document <i class="fas fa-arrow-up-right-from-square"></i></a>` : ''}
+                </div>
+            </div>
+        `).join('');
+    } catch (err) {
+        grid.innerHTML = `<div class="empty-state"><p>Could not load tenders. Please try again later.</p></div>`;
+    }
+}
+
+loadTenders();
+</script>
+</body>
+</html>
