@@ -9,34 +9,6 @@
         }
     });
 
-    // 2. Interactive Search Simulation with Modern UI States
-    function simulateSearch() {
-        const query = document.getElementById('tenderSearch').value;
-        const btnText = document.getElementById('btnText');
-        const searchBtn = document.getElementById('searchBtn');
-
-        if(!query) {
-            alert("Please enter a keyword to begin intelligence scanning.");
-            return;
-        }
-
-        // Processing State: Spinning Notch Icon
-        btnText.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Analyzing Portals...';
-        searchBtn.disabled = true;
-
-        setTimeout(() => {
-            btnText.innerHTML = '<i class="fas fa-search"></i> Search Bids';
-            searchBtn.disabled = false;
-            // Realistic Alert Message
-            alert(`Intelligence scan complete for "${query}". Found 127 matching live tenders and 45 historical awards. Redirecting to your personalized feed...`);
-        }, 1800);
-    }
-
-    // 3. Chatbot Trigger Logic
-    document.getElementById('chatbotTrigger').addEventListener('click', () => {
-        const chatContainer = document.getElementById('chatContainer');
-    });
-
     // 4. Form Submission Logic
     document.getElementById('demoForm').addEventListener('submit', (e) => {
         e.preventDefault();
