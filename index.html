@@ -45,13 +45,13 @@
 
 <section class="hero">
   <div class="container animate__animated animate__fadeIn">
-    <span class="section-tag" style="background: rgba(0,242,255,0.1); padding: 6px 20px; border-radius: 50px; display: inline-block;">ISO 27001 SECURED <br>India's Premier AI Platform</span>
+    <span class="section-tag" style="background: rgba(0,242,255,0.1); padding: 6px 20px; border-radius: 50px; display: inline-block;">India's Growing Procurement Platform</span>
     <h1>Bidding Intelligence <br><span class="gradient-text">Redefined for India</span></h1>
     <p>Empowering businesses with real-time analytics and hyper-local data from all States & UTs. Win more with TenderSphere's predictive bidding engine.</p>
     
     <div class="search-container">
         <input type="text" id="tenderSearch" class="search-input" placeholder="Search by Project, Department, or Location...">
-        <button id="searchBtn" class="btn-luxury" style="padding: 12px 40px; border-radius: 100px;" onclick="simulateSearch()">
+        <button id="searchBtn" class="btn-luxury" style="padding: 12px 40px; border-radius: 100px;" onclick="goToSearch()">
             <span id="btnText">Scan Engine</span>
         </button>
     </div>
@@ -65,9 +65,24 @@
     </div>
     
     <div class="stats-bar">
-        <div class="stat-item"><span class="stat-number">15,000+</span><span class="stat-label">Daily Updates</span></div>
-        <div class="stat-item"><span class="stat-number">5 Lacs+</span><span class="stat-label">Live Opportunities</span></div>
-        <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Verified Data</span></div>
+        <div class="stat-item"><span class="stat-number" id="liveTenderCount">—</span><span class="stat-label">Live Opportunities</span></div>
+        <div class="stat-item"><span class="stat-number">28</span><span class="stat-label">States Covered</span></div>
+        <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Manually Verified</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="latest-tenders">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 50px;">
+        <span class="section-tag">Live Feed</span>
+        <h2 style="font-size: 3rem;">Latest <span class="gradient-text">Tenders</span></h2>
+    </div>
+    <div id="homeTenderList" style="max-width: 900px; margin: 0 auto;">
+        <p style="text-align:center; color: var(--muted);">Loading tenders...</p>
+    </div>
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="tenders.html" class="btn-luxury" style="padding: 14px 35px; text-decoration: none; display: inline-block;">View All Tenders</a>
     </div>
   </div>
 </section>
@@ -229,19 +244,19 @@
     <div class="faq-container">
       <details>
         <summary>Which portals do you cover?</summary>
-        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">We provide 100% coverage of CPPP, GeM, Railways, Defence (MES), and all 37 individual State/UT e-procurement portals across India.</p>
+        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">We're actively expanding coverage across CPPP, GeM, and state-level e-procurement portals. Our listings grow daily as we verify and add new tenders.</p>
       </details>
       <details>
         <summary>How frequently is the database updated?</summary>
-        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">Our AI engines scan government portals 24/7. New notices appear on your feed within minutes of official publication.</p>
+        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">We manually verify and add new tenders regularly to keep listings accurate and trustworthy.</p>
       </details>
       <details>
-        <summary>Can I set up WhatsApp alerts?</summary>
-        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">Yes. Our Premium plans offer real-time WhatsApp integration so you receive alerts on the go.</p>
+        <summary>Can I set up alerts?</summary>
+        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">Alert notifications are on our roadmap. Register now to be notified when this launches.</p>
       </details>
       <details>
         <summary>Do you provide historical award data?</summary>
-        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">Absolutely. We track previous winners and L1 pricing to help you benchmark your bids against competitors.</p>
+        <p style="padding: 30px; color: var(--muted); font-size: 1.05rem; line-height: 1.8;">Historical award data and pricing benchmarks are planned for a future release.</p>
       </details>
     </div>
   </div>
@@ -295,5 +310,45 @@
     </div>
 </div>
 <script src="script.js"></script>
+<script>
+function goToSearch() {
+    const keyword = document.getElementById('tenderSearch').value.trim();
+    window.location.href = keyword ? `search.html?q=${encodeURIComponent(keyword)}` : 'search.html';
+}
+
+async function loadHomeTenders() {
+    const API_URL = "https://tendersphere-backend.onrender.com/api";
+    const listEl = document.getElementById('homeTenderList');
+    const countEl = document.getElementById('liveTenderCount');
+
+    try {
+        const res = await fetch(`${API_URL}/tenders/`);
+        const data = await res.json();
+        const tenders = data.tenders || [];
+
+        if (countEl) countEl.innerText = tenders.length + '+';
+
+        if (tenders.length === 0) {
+            listEl.innerHTML = `<p style="text-align:center; color: var(--muted);">No tenders posted yet. Check back soon.</p>`;
+            return;
+        }
+
+        listEl.innerHTML = tenders.slice(0, 5).map(t => `
+            <div style="background: var(--card-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 25px; margin-bottom: 16px;">
+                <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                    <span style="color: var(--primary); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">${t.category}</span>
+                    <span style="color: var(--muted); font-size: 0.8rem;">${t.state}</span>
+                </div>
+                <h3 style="margin: 12px 0 6px 0; font-size: 1.1rem;">${t.title}</h3>
+                <p style="color: var(--muted); font-size: 0.85rem; margin:0;">${t.department} · Closes ${t.deadline}</p>
+            </div>
+        `).join('');
+    } catch (err) {
+        listEl.innerHTML = `<p style="text-align:center; color: var(--muted);">Could not load tenders right now.</p>`;
+    }
+}
+
+loadHomeTenders();
+</script>
 </body>
 </html>
