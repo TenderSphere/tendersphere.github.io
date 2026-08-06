@@ -143,14 +143,69 @@ function toggleChat() {
 document.getElementById('chatbotTrigger').onclick = toggleChat;
 
 // 2. Chat Logic & Knowledge Base
-const botKnowledge = {
-    "pricing": "We offer Basic, Professional, and Enterprise plans. Enterprise includes 1-on-1 consultancy and API access.",
-    "coverage": "TenderSphere covers all 28 Indian States, 8 UTs, GeM, CPPP, and Global tenders.",
-    "company": "TenderSphere is India's premier AI-driven procurement intelligence platform, founded to simplify bidding.",
-    "contact": "You can reach our support team at support@tendersphere.in or via the 'Request Demo' form.",
-    "alerts": "Yes! We provide real-time alerts via WhatsApp and Email based on your keywords.",
-    "hello": "Hello! I am the Sphere AI. How can I help you navigate Indian tenders today?"
-};
+// 2. Chat Logic & Knowledge Base
+const botKnowledge = [
+    {
+        keywords: ["register", "sign up", "signup", "create account", "join"],
+        response: "You can register for free — click 'Client Login' at the top, then 'Register Now' on that page. You'll need a username, email, phone, state, and your tender interests."
+    },
+    {
+        keywords: ["login", "log in", "sign in", "password", "forgot password"],
+        response: "Click 'Client Login' at the top of the page. Forgot your password? There's a 'Forgot Password?' link right on the login form."
+    },
+    {
+        keywords: ["price", "pricing", "cost", "plan", "subscription", "fee", "pay", "payment"],
+        response: "TenderSphere is currently free to use. Register for a free account to see full tender details, values, and documents."
+    },
+    {
+        keywords: ["coverage", "states", "region", "location", "which state", "pan india"],
+        response: "We're actively expanding coverage across Indian states and union territories. You can browse tenders by state on our Tenders page."
+    },
+    {
+        keywords: ["category", "categories", "sector", "industry", "type of tender"],
+        response: "We cover categories including Construction, IT & Software, Healthcare, Defence, Education, Transport, Energy, Agriculture, Insurance, Consultancy, Manufacturing, and more."
+    },
+    {
+        keywords: ["how does", "how it works", "how this works", "what is tendersphere", "about"],
+        response: "TenderSphere lists real government tenders across categories and states. Anyone can browse basic details; registered users unlock full descriptions, tender values, reference numbers, and document links."
+    },
+    {
+        keywords: ["browse", "see tenders", "view tenders", "list of tenders", "find tender", "search tender"],
+        response: "You can browse all tenders on our Tenders page, or use the search bar on the homepage to filter by keyword."
+    },
+    {
+        keywords: ["document", "download", "nit", "tender document"],
+        response: "Document links are available to registered, logged-in users on each tender listing."
+    },
+    {
+        keywords: ["alert", "notification", "whatsapp", "email alert"],
+        response: "Automated alerts aren't live yet, but they're on our roadmap. Register now and we'll notify you when this launches."
+    },
+    {
+        keywords: ["deadline", "closing date", "last date", "submission date"],
+        response: "Each tender listing shows its closing/submission deadline. Registered users also see the full reference number and document link."
+    },
+    {
+        keywords: ["contact", "support", "help", "reach", "email us", "phone number"],
+        response: "You can reach us using the call or WhatsApp buttons in the bottom-left corner, or through the 'Request Private Demo' form on this page."
+    },
+    {
+        keywords: ["free", "cost anything", "is this free"],
+        response: "Yes, registering and browsing tenders on TenderSphere is currently free."
+    },
+    {
+        keywords: ["add tender", "submit tender", "contribute", "list a tender"],
+        response: "Tender listings are currently added by our team after verification. Contact us if you'd like to contribute data."
+    },
+    {
+        keywords: ["hi", "hello", "hey", "namaste"],
+        response: "Hello! I'm the Sphere Assistant. Ask me about registering, browsing tenders, categories we cover, or how TenderSphere works."
+    },
+    {
+        keywords: ["thank", "thanks"],
+        response: "You're welcome! Let me know if you have any other questions."
+    }
+];
 
 function handleChat() {
     const input = document.getElementById('chatInput');
@@ -159,28 +214,23 @@ function handleChat() {
 
     if (!text) return;
 
-    // Add User Message
     body.innerHTML += `<div class="user-msg">${input.value}</div>`;
     input.value = "";
-
-    // Scroll to bottom
     body.scrollTop = body.scrollHeight;
 
-    // AI Response Simulation
     setTimeout(() => {
-        let response = "I'm sorry, I don't have information on that specific topic. Would you like to speak with a human expert?";
-        
-        // Keyword matching logic
-        for (let key in botKnowledge) {
-            if (text.includes(key)) {
-                response = botKnowledge[key];
+        let response = "I don't have an answer for that yet. Try asking about registration, tender categories, states we cover, or how TenderSphere works — or reach us directly via the call/WhatsApp buttons.";
+
+        for (const entry of botKnowledge) {
+            if (entry.keywords.some(k => text.includes(k))) {
+                response = entry.response;
                 break;
             }
         }
 
-        body.innerHTML += `<div class="bot-msg"><b>Sphere AI:</b> ${response}</div>`;
+        body.innerHTML += `<div class="bot-msg"><b>Sphere Assistant:</b> ${response}</div>`;
         body.scrollTop = body.scrollHeight;
-    }, 800);
+    }, 500);
 }
 
 // Allow "Enter" key to send message
