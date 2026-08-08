@@ -298,4 +298,3 @@ footer { padding: 100px 20px; border-top: 1px solid var(--glass-border); text-al
     flex: 1; background: transparent; border: none; color: white; outline: none; font-size: 0.9rem;
 }
 .chat-footer button { background: var(--primary); border: none; width: 35px; height: 35px; border-radius: 10px; cursor: pointer; }
-
