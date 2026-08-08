@@ -39,7 +39,7 @@
       <li><a href="#locations">Coverage</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
-    <button class="btn-luxury" style="padding: 10px 22px; font-size: 0.85rem; border-radius: 10px;"><a href="login.html" style="color: #000; text-decoration: none;">CLIENT LOGIN</a></button>
+    <button class="btn-luxury" style="padding: 10px 22px; font-size: 0.85rem; border-radius: 10px;"><a id="navAuthLink" href="login.html" style="color: #000; text-decoration: none;">CLIENT LOGIN</a></button>
   </div>
 </nav>
 
@@ -345,6 +345,13 @@ async function loadHomeTenders() {
     } catch (err) {
         listEl.innerHTML = `<p style="text-align:center; color: var(--muted);">Could not load tenders right now.</p>`;
     }
+}
+
+const authToken = localStorage.getItem('access_token');
+if (authToken) {
+    const authLink = document.getElementById('navAuthLink');
+    authLink.href = "dashboard.html";
+    authLink.innerText = "DASHBOARD";
 }
 
 loadHomeTenders();
