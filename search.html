@@ -175,6 +175,10 @@
 <script>
 const API_URL = "https://tendersphere-backend.onrender.com/api";
 const token = localStorage.getItem('access_token');
+    if (token) {
+    document.getElementById('navAuthLink').href = "dashboard.html";
+    document.getElementById('navAuthLink').innerText = "DASHBOARD";
+}
 let allTenders = [];
 let isLoggedIn = false;
 
